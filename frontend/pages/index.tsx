@@ -1,15 +1,21 @@
 import type { GetStaticProps, NextPage } from 'next'
+import { Header } from 'components' 
+import { IDescription } from 'types'
 
-const Home: NextPage = () => {
+
+const Home: NextPage<IDescription> = ({description}) => {
   return (
-    <h1>Hello</h1>
+    <div className="page">
+      <Header description={description}/>
+    </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = () => {
-  console.log('@@@@@')
-  return {
-    props: {}
+export const getStaticProps: GetStaticProps<IDescription> = () => {
+  return{
+      props: {
+          description: 'ss'
+      }
   }
 }
 
