@@ -13,14 +13,15 @@ const Home: NextPage<IDescription> = ({ description }) => {
 }
 
 export const getStaticProps: GetStaticProps<IDescription> = async () => {
-  server.listen({ onUnhandledRequest: "bypass" })
+  server.listen()
   const res = await fetch('http://localhost:3000/getDescription')
   const { description }: IDescription = await res.json()
+  server.close()
   return {
     props: {
       description
     }
   }
-} 
+}
 
 export default Home
