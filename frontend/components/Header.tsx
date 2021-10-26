@@ -1,5 +1,5 @@
-import { GetStaticProps, NextPage } from 'next'
 import React from 'react'
+import { NextPage } from 'next'
 import { IDescription } from 'types'
 
 const Header: NextPage<IDescription> = ({description}) => {
