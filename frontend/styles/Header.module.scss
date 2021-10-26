@@ -1,0 +1,13 @@
+.Header{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    h1{
+        margin: 0;
+        font-size: 550%;
+    }
+    &_description{
+        font-size: 160%;
+        letter-spacing: 4px;
+    }
+}
