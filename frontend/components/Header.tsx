@@ -3,19 +3,35 @@ import { NextPage } from 'next'
 import { IDescription } from 'types'
 import styles from 'styles/Header.module.scss'
 
-const { Header_description } = styles
+const { Header_description, hide, show } = styles
 
 const Header: NextPage<IDescription> = ({ description }) => {
 
     const headerRef = useRef<HTMLDivElement>(null)
 
     useLayoutEffect(() => {
-        const letters = headerRef.current?.textContent
-    }, [])
+        let timer: NodeJS.Timeout
+        if (headerRef.current) {
+            const letters = headerRef.current?.textContent
+            headerRef.current.innerHTML = ''
+            for (const letter of letters!) {
+                headerRef.current!.innerHTML += `<span class=${hide}>${letter}</span>`
+            }
 
-    useEffect(() => {
-        const letters = headerRef.current?.textContent
-        console.log(letters)
+            const lettersElements = Array.from(headerRef.current.children)
+            const showLetter = (index: number) => {
+                if(index === lettersElements.length) return
+                lettersElements[index].className = show
+                timer = setTimeout(() => {
+                    showLetter(++index)
+                }, 50)
+            }
+            
+            showLetter(0)
+        }
+        return (() => {
+            timer && clearTimeout(timer)
+        })
     }, [])
 
     return (
