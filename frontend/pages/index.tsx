@@ -14,7 +14,8 @@ const Home: NextPage<IDescription> = ({ description }) => {
 
 export const getStaticProps: GetStaticProps<IDescription> = async () => {
   server.listen()
-  const res = await fetch('http://localhost:3000/getDescription')
+  let ENDPOINT = process.env.HEADER_DESCRIPTION || ''
+  const res = await fetch(ENDPOINT)
   const { description }: IDescription = await res.json()
   server.close()
   return {
