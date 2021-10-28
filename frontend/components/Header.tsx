@@ -9,7 +9,7 @@ const Header: NextPage<IDescription> = ({ description }) => {
 
     const headerRef = useRef<HTMLDivElement>(null)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let timer: NodeJS.Timeout
         if (headerRef.current) {
             const letters = headerRef.current?.textContent
@@ -20,13 +20,13 @@ const Header: NextPage<IDescription> = ({ description }) => {
 
             const lettersElements = Array.from(headerRef.current.children)
             const showLetter = (index: number) => {
-                if(index === lettersElements.length) return
+                if (index === lettersElements.length) return
                 lettersElements[index].className = show
                 timer = setTimeout(() => {
                     showLetter(++index)
                 }, 50)
             }
-            
+
             showLetter(0)
         }
         return (() => {
