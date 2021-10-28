@@ -1,15 +1,26 @@
 import type { GetStaticProps, NextPage } from 'next'
+import { Header } from 'components'
+import { IDescription } from 'types'
+import server from 'mocks'
 
-const Home: NextPage = () => {
+
+const Home: NextPage<IDescription> = ({ description }) => {
   return (
-    <h1>Hello</h1>
+    <div className="page">
+      <Header description={description} />
+    </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = () => {
-  console.log('@@@@@')
+export const getStaticProps: GetStaticProps<IDescription> = async () => {
+  server.listen()
+  const res = await fetch('http://localhost:3000/getDescription')
+  const { description }: IDescription = await res.json()
+  server.close()
   return {
-    props: {}
+    props: {
+      description
+    }
   }
 }
 

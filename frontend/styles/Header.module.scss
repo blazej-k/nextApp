@@ -1,0 +1,30 @@
+.Header{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    h1{
+        margin: 0;
+        font-size: 550%;
+    }
+    &_description{
+        font-size: 160%;
+        letter-spacing: 4px;
+        span{
+            &.hide{
+                opacity: 0;
+            }
+            &.show{
+                animation: lettersAnimation 2s;
+            }
+        }
+    }
+}
+
+@keyframes lettersAnimation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
