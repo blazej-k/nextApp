@@ -2,4 +2,9 @@ interface IDescription {
     description: string
 }
 
-export type {IDescription}
+interface IFormInfo {
+    email: string
+    password: string
+}
+
+export type {IDescription, IFormInfo}

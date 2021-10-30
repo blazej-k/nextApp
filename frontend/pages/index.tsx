@@ -1,13 +1,27 @@
+import React, {MouseEvent} from 'react'
 import type { GetStaticProps, NextPage } from 'next'
-import { Header } from 'components'
-import { IDescription } from 'types'
+import { Form, Header } from 'components'
+import { IDescription, IFormInfo } from 'types'
 import server from 'mocks'
+import { useState } from 'react'
 
 
 const Home: NextPage<IDescription> = ({ description }) => {
+
+  const [haveUserAccount, setHaveUserAccount] = useState(false)
+
+  const submitForm = (form: IFormInfo) => {
+    console.log(form)
+  }
+
   return (
     <div className="page">
       <Header description={description} />
+      <Form 
+        haveUserAccount={haveUserAccount} 
+        changeHaveUserAccount={() => setHaveUserAccount(prev => !prev)}
+        handleSubmitForm={submitForm}
+      />
     </div>
   )
 }
