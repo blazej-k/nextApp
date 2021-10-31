@@ -6,7 +6,6 @@
     margin: 30px auto;
     border: 1px solid black;
     border-radius: 15px;
-    padding: 0 20px 20px;
     h1 {
         text-align: center;
         margin: 0;
@@ -16,11 +15,14 @@
         flex-wrap: wrap;
         font-size: 150%;
         margin-top: 20px;
-        label {
-            flex-basis: 20%;
+        padding: 0 40px 20px;
+        .Form-input-area{
+            flex-basis: 100%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
         }
         input {
-            flex-basis: 60%;
             margin-bottom: 10px;
             border: none;
             border-bottom: 1px solid black;
@@ -28,6 +30,7 @@
             color: $form-color;
             padding: 10px;
             padding-bottom: 0;
+            width: 60%;
         }
         button.Form-info {
             color: $form-color;
@@ -56,7 +59,7 @@
             position: absolute;
             display: inline;
             width: 100%;
-            top: -100%;
+            top: 30%;
             left: 110%;
             content: "E-mail or password is empty";
             background-color: rgba(255, 255, 255, 1);
