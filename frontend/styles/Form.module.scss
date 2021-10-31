@@ -1,0 +1,70 @@
+@import "variebles";
+@import 'animations';
+
+.Form {
+    width: 40%;
+    margin: 30px auto;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 0 20px 20px;
+    h1 {
+        text-align: center;
+        margin: 0;
+    }
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 150%;
+        margin-top: 20px;
+        label {
+            flex-basis: 20%;
+        }
+        input {
+            flex-basis: 60%;
+            margin-bottom: 10px;
+            border: none;
+            border-bottom: 1px solid black;
+            font-size: 80%;
+            color: $form-color;
+            padding: 10px;
+            padding-bottom: 0;
+        }
+        button.Form-info {
+            color: $form-color;
+            border: none;
+            font-size: 60%;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        button.Form-submit {
+            flex-basis: 20%;
+            border: none;
+            background-color: black;
+            color: white;
+            font-size: 80%;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 7px;
+            margin: 10px 10px 10px auto;
+        }
+        button.Form-submit:disabled {
+            background: rgba(0, 0, 0, 0.5);
+            cursor: auto;
+            position: relative;
+        }
+        button.Form-submit:disabled:hover::after {
+            position: absolute;
+            display: inline;
+            width: 100%;
+            top: -100%;
+            left: 110%;
+            content: "E-mail or password is empty";
+            background-color: rgba(255, 255, 255, 1);
+            color: black;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: 80%;
+            animation: fadeIn .4s;
+        }
+    }
+}

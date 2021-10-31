@@ -1,3 +1,5 @@
+@import 'animations';
+
 .Header{
     width: 50%;
     margin: auto;
@@ -14,17 +16,8 @@
                 opacity: 0;
             }
             &.show{
-                animation: lettersAnimation 2s;
+                animation: fadeIn 2s;
             }
         }
-    }
-}
-
-@keyframes lettersAnimation {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
     }
 }

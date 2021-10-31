@@ -1,4 +1,4 @@
-import React, {MouseEvent} from 'react'
+import React from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import { Form, Header } from 'components'
 import { IDescription, IFormInfo } from 'types'
