@@ -36,7 +36,7 @@
             font-size: 80%;
             cursor: pointer;
             padding: 10px;
-            border-radius: 10px;
+            border-radius: 7px;
         }
         button.Form-info {
             color: $form-color;
@@ -45,9 +45,14 @@
             cursor: pointer;
             background-color: transparent;
         }
-        button[type="submit"] {
+        button.Form-submit {
             @include buttonStyle;
             margin: 10px 10px 10px auto;
+        }
+        button.Form-submit:disabled {
+           opacity: .5;
+           cursor: auto;
+           position: relative;
         }
     }
 }

@@ -31,10 +31,15 @@ const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleS
 
     const submitForm = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
-        handleSubmitForm(form)
+        email && password && handleSubmitForm(form)
     }
 
-    const handleInputChange = (arg: IFormAction) => dispatch(arg)
+    const handleInputChange = (arg: IFormAction) => {
+        dispatch(arg)
+    }
+
+    const { email, password } = form
+    const disableSubmit = !Boolean(email && password)
 
     return (
         <div className={styles.Form}>
@@ -47,7 +52,9 @@ const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleS
                 <button className={styles['Form-info']} onClick={changeHaveUserAccount}>
                     I have not an account
                 </button>
-                <button type="submit">Sign in</button>
+                <button disabled={disableSubmit} className={styles['Form-submit']} type="submit">
+                    Sign in
+                </button>
             </form>
         </div>
     )
