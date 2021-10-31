@@ -50,10 +50,10 @@ const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleS
                 <label htmlFor="password">Password:</label>
                 <input type="password" id='password' onChange={e => handleInputChange({ type: 'password', payload: e.target.value })} />
                 <button className={styles['Form-info']} onClick={changeHaveUserAccount}>
-                    I have not an account
+                    {haveUserAccount ? "I haven't an account" : "I have an account"}
                 </button>
                 <button disabled={disableSubmit} className={styles['Form-submit']} type="submit">
-                    Sign in
+                    {haveUserAccount ? 'Sign in' : 'Sign up'}
                 </button>
             </form>
         </div>
