@@ -45,10 +45,14 @@ const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleS
         <div className={styles.Form}>
             <h1>{haveUserAccount ? 'Sign in' : 'Sign up'}</h1>
             <form onSubmit={submitForm}>
-                <label htmlFor="email">E-mail:</label>
-                <input type="email" id='email' onChange={e => handleInputChange({ type: 'email', payload: e.target.value })} />
-                <label htmlFor="password">Password:</label>
-                <input type="password" id='password' onChange={e => handleInputChange({ type: 'password', payload: e.target.value })} />
+                <div className={styles['Form-input-area']}>
+                    <label htmlFor="email">E-mail:</label>
+                    <input type="email" id='email' onChange={e => handleInputChange({ type: 'email', payload: e.target.value })} />
+                </div>
+                <div className={styles['Form-input-area']}>
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" id='password' onChange={e => handleInputChange({ type: 'password', payload: e.target.value })} />
+                </div>
                 <button className={styles['Form-info']} onClick={changeHaveUserAccount}>
                     {haveUserAccount ? "I haven't an account" : "I have an account"}
                 </button>
