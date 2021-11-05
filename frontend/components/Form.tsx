@@ -1,28 +1,13 @@
 import React, { MouseEvent, useReducer } from 'react'
 import { NextPage } from 'next'
 import { IFormAction, IFormInfo } from 'types'
+import { formReducer, initReducerState } from './helpers'
 import styles from 'styles/Form.module.scss'
 
 interface IForm {
     haveUserAccount: boolean,
     changeHaveUserAccount: () => void,
     handleSubmitForm: (form: IFormInfo) => void
-}
-
-const initReducerState: IFormInfo = {
-    email: '',
-    password: ''
-}
-
-const formReducer = (state: IFormInfo = initReducerState, action: IFormAction) => {
-    switch (action.type) {
-        case 'email':
-            return { ...state, email: action.payload }
-        case 'password':
-            return { ...state, password: action.payload }
-        default:
-            throw new Error('Invalid action type')
-    }
 }
 
 const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleSubmitForm }) => {
