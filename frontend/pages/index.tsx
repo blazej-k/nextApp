@@ -18,7 +18,7 @@ const Home: NextPage<IDescription> = ({ description }) => {
 
     if (!process.env.GET_USER) throw new Error(`URL must be string but he is ${typeof process.env.GET_USER}`)
 
-    const user: IUser = await serverRequest({ URL: process.env.GET_USER, reqBody: body })
+    const user: IUser = await serverRequest({ URL: process.env.GET_USER, reqBody: body, method: 'POST' })
     router.push('/start')
   }
 
