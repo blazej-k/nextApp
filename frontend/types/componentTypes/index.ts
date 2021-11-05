@@ -2,4 +2,9 @@ interface IDescription {
     description: string
 }
 
-export type {IDescription}
+interface IGetUser {
+    email: string,
+    password: string
+}
+
+export type { IDescription, IGetUser }
