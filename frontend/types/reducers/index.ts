@@ -9,4 +9,9 @@ interface IFormInfo {
     error: string
 }
 
-export type {IFormAction, IFormInfo}
+interface IUser {
+    login: string,
+    token: string | number,
+}
+
+export type { IFormAction, IFormInfo, IUser }
