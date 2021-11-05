@@ -10,6 +10,12 @@
         text-align: center;
         margin: 0;
     }
+    &-invalid{
+        font-size: 70%;
+        flex-basis: 100%;
+        text-align: center;
+        color: $form-determinant;
+    }
     form {
         display: flex;
         flex-wrap: wrap;
@@ -31,6 +37,11 @@
             padding: 10px;
             padding-bottom: 0;
             width: 60%;
+            outline: none;
+            background-color: transparent;
+            &:focus{
+                border-color: $form-determinant;
+            }
         }
         button.Form-info {
             color: $form-color;

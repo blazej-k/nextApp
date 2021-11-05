@@ -1,6 +1,7 @@
-import React, { MouseEvent, useReducer } from 'react'
+import React, { MouseEvent, useReducer, useState } from 'react'
 import { NextPage } from 'next'
 import { IFormAction, IFormInfo } from 'types'
+import { formReducer, initReducerState } from './helpers'
 import styles from 'styles/Form.module.scss'
 
 interface IForm {
@@ -9,36 +10,25 @@ interface IForm {
     handleSubmitForm: (form: IFormInfo) => void
 }
 
-const initReducerState: IFormInfo = {
-    email: '',
-    password: ''
-}
-
-const formReducer = (state: IFormInfo = initReducerState, action: IFormAction) => {
-    switch (action.type) {
-        case 'email':
-            return { ...state, email: action.payload }
-        case 'password':
-            return { ...state, password: action.payload }
-        default:
-            throw new Error('Invalid action type')
-    }
-}
+const emailValidation = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleSubmitForm }) => {
 
     const [form, dispatch] = useReducer(formReducer, initReducerState)
+    const [invalidForm, setInvalidForm] = useState(false)
 
     const submitForm = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
-        email && password && handleSubmitForm(form)
+        if(!emailValidation.test(email)) dispatch({type: 'error', payload: "E-mail isn't correct"})
+        else if(emailValidation.test(email) && password && !error) handleSubmitForm(form)
     }
 
     const handleInputChange = (arg: IFormAction) => {
+        invalidForm && setInvalidForm(false)
         dispatch(arg)
     }
 
-    const { email, password } = form
+    const { email, password, error } = form
     const disableSubmit = !Boolean(email && password)
 
     return (
@@ -47,17 +37,26 @@ const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleS
             <form onSubmit={submitForm}>
                 <div className={styles['Form-input-area']}>
                     <label htmlFor="email">E-mail:</label>
-                    <input type="email" id='email' onChange={e => handleInputChange({ type: 'email', payload: e.target.value })} />
+                    <input 
+                        type="email" 
+                        id='email' 
+                        onChange={e => handleInputChange({ type: 'email', payload: e.target.value })} 
+                    />
                 </div>
                 <div className={styles['Form-input-area']}>
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id='password' onChange={e => handleInputChange({ type: 'password', payload: e.target.value })} />
+                    <input 
+                        type="password" 
+                        id='password' 
+                        onChange={e => handleInputChange({ type: 'password', payload: e.target.value })} 
+                    />
                 </div>
+                {error && <div className={styles["Form-invalid"]}>{error}</div>}
                 <button className={styles['Form-info']} onClick={changeHaveUserAccount}>
                     {haveUserAccount ? "I haven't an account" : "I have an account"}
                 </button>
                 <button disabled={disableSubmit} className={styles['Form-submit']} type="submit">
-                    {haveUserAccount ? 'Sign in' : 'Sign up'}
+                    Ready!
                 </button>
             </form>
         </div>
