@@ -31,6 +31,10 @@
             padding: 10px;
             padding-bottom: 0;
             width: 60%;
+            outline: none;
+            &:focus{
+                border-color: red;
+            }
         }
         button.Form-info {
             color: $form-color;
