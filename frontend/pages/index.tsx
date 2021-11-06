@@ -1,13 +1,13 @@
 import React from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import { Form, Header } from 'components'
-import { IDescription, IFormInfo, IGetUser, IInvalidUser, IUser } from 'types'
+import { IHeader, IFormInfo, IGetUser, IServerFailureMessege, IUser } from 'types'
 import { useState } from 'react'
 import { useRouter } from 'next/dist/client/router'
 import { serverRequest } from './helpers'
 
 
-const Home: NextPage<IDescription> = ({ description }) => {
+const Home: NextPage<IHeader> = ({ description }) => {
 
   const [haveUserAccount, setHaveUserAccount] = useState(false)
   const [serverErrorMess, setServerErrorMess] = useState('')
@@ -17,7 +17,7 @@ const Home: NextPage<IDescription> = ({ description }) => {
     if (!process.env.GET_USER) throw new Error(`URL must be string but he is ${typeof process.env.GET_USER}`)
     const reqBody: IGetUser = { email, password }
     const ENDPOINT = process.env.GET_USER
-    const res: IUser | IInvalidUser = await serverRequest({ URL: ENDPOINT, reqBody, method: 'POST' })
+    const res: IUser | IServerFailureMessege = await serverRequest({ URL: ENDPOINT, reqBody, method: 'POST' })
     'token' in res ? router.push('/start') : setServerErrorMess(res.message)
   }
 
@@ -34,9 +34,9 @@ const Home: NextPage<IDescription> = ({ description }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps<IDescription> = async () => {
+export const getStaticProps: GetStaticProps<IHeader> = async () => {
   let ENDPOINT = process.env.HEADER_DESCRIPTION || ''
-  const { description }: IDescription = await serverRequest({ URL: ENDPOINT })
+  const { description }: IHeader = await serverRequest({ URL: ENDPOINT })
   return {
     props: {
       description

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { NextPage } from 'next'
-import { IDescription } from 'types'
+import { IHeader } from 'types'
 import styles from 'styles/Header.module.scss'
 
 const { Header_description, hide, show } = styles
 
-const Header: NextPage<IDescription> = ({ description }) => {
+const Header: NextPage<IHeader> = ({ description }) => {
 
     const headerRef = useRef<HTMLDivElement>(null)
 

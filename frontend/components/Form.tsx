@@ -1,15 +1,8 @@
 import React, { MouseEvent, useEffect, useReducer, useState } from 'react'
 import { NextPage } from 'next'
-import { IFormAction, IFormInfo } from 'types'
+import { IFormAction, IForm } from 'types'
 import { formReducer, initReducerState } from './helpers'
 import styles from 'styles/Form.module.scss'
-
-interface IForm {
-    haveUserAccount: boolean,
-    serverErrorMess: string,
-    changeHaveUserAccount: () => void,
-    handleSubmitForm: (form: IFormInfo) => void
-}
 
 const emailValidation = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
