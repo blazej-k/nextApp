@@ -7,4 +7,8 @@ interface IGetUser {
     password: string
 }
 
-export type { IDescription, IGetUser }
+interface IInvalidUser {
+    message: string
+}
+
+export type { IDescription, IGetUser, IInvalidUser }

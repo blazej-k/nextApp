@@ -1,4 +1,4 @@
-import React, { MouseEvent, useReducer, useState } from 'react'
+import React, { MouseEvent, useEffect, useReducer, useState } from 'react'
 import { NextPage } from 'next'
 import { IFormAction, IFormInfo } from 'types'
 import { formReducer, initReducerState } from './helpers'
@@ -6,16 +6,23 @@ import styles from 'styles/Form.module.scss'
 
 interface IForm {
     haveUserAccount: boolean,
+    serverErrorMess: string,
     changeHaveUserAccount: () => void,
     handleSubmitForm: (form: IFormInfo) => void
 }
 
 const emailValidation = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-const Form: NextPage<IForm> = ({ haveUserAccount, changeHaveUserAccount, handleSubmitForm }) => {
+const Form: NextPage<IForm> = ({ haveUserAccount, serverErrorMess, changeHaveUserAccount, handleSubmitForm }) => {
 
     const [form, dispatch] = useReducer(formReducer, initReducerState)
     const [invalidForm, setInvalidForm] = useState(false)
+
+    useEffect(() => {
+        if(serverErrorMess){
+            dispatch({type: 'error', payload: serverErrorMess})
+        }
+    }, [serverErrorMess])
 
     const submitForm = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
