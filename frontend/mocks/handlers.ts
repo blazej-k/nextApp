@@ -10,7 +10,7 @@ const handlers = [
             ctx.json<IDescription>({ description: 'We are here to help' })
         )
     }),
-    rest.get('http://localhost:3000/getUser', (req, res, ctx) => {
+    rest.post('http://localhost:3000/getUser', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json<IUser>({login: 'blazej@example.com', token: 101023283828})
