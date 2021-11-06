@@ -1,31 +1,39 @@
 import React from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import { Form, Header } from 'components'
-import { IDescription, IFormInfo, IGetUser, IUser } from 'types'
-import server from 'mocks'
+import { IHeader, IFormInfo, IGetUser, IServerFailureMessege, IUser } from 'types'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { serverRequest } from './helpers'
-import { useRouter } from 'next/dist/client/router'
+import { useUser } from 'hooks'
 
 
-const Home: NextPage<IDescription> = ({ description }) => {
+const Home: NextPage<IHeader> = ({ description }) => {
 
   const [haveUserAccount, setHaveUserAccount] = useState(false)
+  const [serverErrorMess, setServerErrorMess] = useState('')
+
   const router = useRouter()
+  const { changeUserData } = useUser()
+
 
   const submitForm = async ({ email, password }: IFormInfo) => {
-    const body: IGetUser = { email, password }
-
     if (!process.env.GET_USER) throw new Error(`URL must be string but he is ${typeof process.env.GET_USER}`)
-
-    const user: IUser = await serverRequest({ URL: process.env.GET_USER, reqBody: body, method: 'POST' })
-    router.push('/start')
+    const reqBody: IGetUser = { email, password }
+    const ENDPOINT = process.env.GET_USER
+    const res: IUser | IServerFailureMessege = await serverRequest({ URL: ENDPOINT, reqBody, method: 'POST' })
+    if ('token' in res) {
+      changeUserData({ type: 'signin', payload: res })
+      router.push('/start')
+    }
+    else setServerErrorMess(res.message)
   }
 
   return (
     <div className="page">
       <Header description={description} />
       <Form
+        serverErrorMess={serverErrorMess}
         haveUserAccount={haveUserAccount}
         changeHaveUserAccount={() => setHaveUserAccount(prev => !prev)}
         handleSubmitForm={submitForm}
@@ -34,12 +42,9 @@ const Home: NextPage<IDescription> = ({ description }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps<IDescription> = async () => {
-  server.listen()
+export const getStaticProps: GetStaticProps<IHeader> = async () => {
   let ENDPOINT = process.env.HEADER_DESCRIPTION || ''
-  const res = await fetch(ENDPOINT)
-  const { description }: IDescription = await res.json()
-  server.close()
+  const { description }: IHeader = await serverRequest({ URL: ENDPOINT })
   return {
     props: {
       description

@@ -1,10 +1,14 @@
-interface IDescription {
+import { IFormInfo } from "types";
+
+interface IHeader {
     description: string
 }
 
-interface IGetUser {
-    email: string,
-    password: string
+interface IForm {
+    haveUserAccount: boolean,
+    serverErrorMess: string,
+    changeHaveUserAccount: () => void,
+    handleSubmitForm: (form: IFormInfo) => void
 }
 
-export type { IDescription, IGetUser }
+export type { IHeader, IForm }
