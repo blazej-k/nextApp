@@ -11,4 +11,8 @@ interface IForm {
     handleSubmitForm: (form: IFormInfo) => void
 }
 
-export type { IHeader, IForm }
+interface IStart {
+    newUsers: number
+}
+
+export type { IHeader, IForm, IStart }
