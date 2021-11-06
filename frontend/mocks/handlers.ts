@@ -1,5 +1,5 @@
 import { rest } from 'msw'
-import { IDescription, IGetUser, IUser, IInvalidUser } from 'types'
+import { IGetUser, IUser, INewUsersLength, IServerFailureMessege, IHeader,  } from 'types'
 
 const login = 'blazej@example.com'
 
@@ -7,7 +7,7 @@ const handlers = [
     rest.get('http://localhost:3000/getDescription', (req, res, ctx) => {
         return res(
             ctx.status(200),
-            ctx.json<IDescription>({ description: 'We are here to help' })
+            ctx.json<IHeader>({ description: 'We are here to help' })
         )
     }),
     rest.post<IGetUser>('http://localhost:3000/getUser', (req, res, ctx) => {
@@ -20,10 +20,16 @@ const handlers = [
         else {
             return res(
                 ctx.status(200),
-                ctx.json<IInvalidUser>({ message: 'Ivalid email or password' })
+                ctx.json<IServerFailureMessege>({ message: 'Ivalid email or password' })
             )
-        }
-    })
+            }
+    }),
+    rest.get('http://localhost:3000/getNewUsers', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json<INewUsersLength>({ length: Math.floor(Math.random() * 100)})
+        )
+    }),
 ]
 
 export default handlers

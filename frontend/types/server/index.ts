@@ -12,4 +12,8 @@ interface IUser {
     token: string | number,
 }
 
-export type { IGetUser, IServerFailureMessege, IUser }
+interface INewUsersLength{
+    length: number
+}
+
+export type { IGetUser, IServerFailureMessege, IUser, INewUsersLength }
