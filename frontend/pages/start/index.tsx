@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { useUser } from 'hooks'
 import { useRouter } from 'next/router'
-import { serverRequest } from './helpers'
+import { serverRequest } from '../helpers'
 import { INewUsersLength, IStart } from 'types'
 
 const Start: NextPage<IStart> = ({ newUsers }) => {
@@ -13,16 +13,25 @@ const Start: NextPage<IStart> = ({ newUsers }) => {
         if (user.token === -1) router.push('/')
     }, [])
 
-    if(user.token !== -1){
+    if (user.token !== -1) {
         return (
             <div className="Start">
-                <h1>Welcome back {user.login}</h1>
-                <h2>Today we have {newUsers} new users</h2>
+                <div className="Start-header">
+                    <h1>Welcome back {user.login}</h1>
+                    <h2>Today we have {newUsers} new users</h2>
+                </div>
+                <div className="Start-content">
+                    <div className="actions">
+                        <button>Get all users</button>
+                        <button>Get new users</button>
+                        <input type="text" placeholder='Search specific user...' />
+                    </div>
+                </div>
             </div>
         )
     }
-    else{
-        return(
+    else {
+        return (
             <div className='loading'>Loading...</div>
         )
     }
