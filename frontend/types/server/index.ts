@@ -1,3 +1,9 @@
+interface IServerRequest {
+    URL: string,
+    reqBody?: object,
+    method?: 'POST' | 'GET'
+}
+
 interface IGetUser {
     email: string,
     password: string
@@ -12,8 +18,13 @@ interface IUser {
     token: string | number,
 }
 
-interface INewUsersLength{
-    length: number
+interface IOtherUser {
+    id: string,
+    login: string
 }
 
-export type { IGetUser, IServerFailureMessege, IUser, INewUsersLength }
+interface IOtherUsers {
+    users: IOtherUser[]
+}
+
+export type { IServerRequest, IGetUser, IServerFailureMessege, IUser, IOtherUser, IOtherUsers }

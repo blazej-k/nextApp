@@ -12,7 +12,7 @@ interface IForm {
 }
 
 interface IStart {
-    newUsers: number
+    newUsersLength: number
 }
 
 export type { IHeader, IForm, IStart }
