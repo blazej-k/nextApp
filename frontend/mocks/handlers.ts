@@ -1,5 +1,6 @@
 import { rest } from 'msw'
-import { IGetUser, IUser, INewUsersLength, IServerFailureMessege, IHeader,  } from 'types'
+import { IGetUser, IUser, IServerFailureMessege, IHeader, IOtherUsers } from 'types'
+import { allUsers, newUsers } from './users'
 
 const login = 'blazej@example.com'
 
@@ -27,7 +28,13 @@ const handlers = [
     rest.get('http://localhost:3000/getNewUsers', (req, res, ctx) => {
         return res(
             ctx.status(200),
-            ctx.json<INewUsersLength>({ length: Math.floor(Math.random() * 100)})
+            ctx.json<IOtherUsers>({ users: newUsers })
+        )
+    }),
+    rest.get('http://localhost:3000/getAllUsers', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json<IOtherUsers>({ users: allUsers })
         )
     }),
 ]
