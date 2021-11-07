@@ -1,3 +1,9 @@
+interface IServerRequest {
+    URL: string,
+    reqBody?: object,
+    method?: 'POST' | 'GET'
+}
+
 interface IGetUser {
     email: string,
     password: string
@@ -16,4 +22,4 @@ interface INewUsersLength{
     length: number
 }
 
-export type { IGetUser, IServerFailureMessege, IUser, INewUsersLength }
+export type { IServerRequest, IGetUser, IServerFailureMessege, IUser, INewUsersLength }

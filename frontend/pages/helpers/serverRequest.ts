@@ -1,8 +1,4 @@
-interface IServerRequest {
-    URL: string,
-    reqBody?: object,
-    method?: 'POST' | 'GET'
-}
+import { IServerRequest } from "types"
 
 const serverRequest = async ({ URL, reqBody, method = 'GET' }: IServerRequest) => {
     if (!URL) throw new Error(`URL must be string but he is ${typeof URL}`)

@@ -22,9 +22,9 @@ const Start: NextPage<IStart> = ({ newUsers }) => {
                 </div>
                 <div className="Start-content">
                     <div className="actions">
-                        <button>Get all users</button>
-                        <button>Get new users</button>
-                        <input type="text" placeholder='Search specific user...' />
+                        <button onClick={() => null}>Get all users</button>
+                        <button onClick={() => null}>Get new users</button>
+                        <input onChange={() => null} type="text" placeholder='Search specific user...' />
                     </div>
                 </div>
             </div>
